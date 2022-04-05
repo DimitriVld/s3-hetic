@@ -1,8 +1,23 @@
 import Head from 'next/head'
+import { makeQuery } from '../db'
 
 export async function getStaticProps() {
+  try {
+    const data = await makeQuery('SELECT * FROM film')
+    console.log(data)
+    return {
+      props: {
+        movies: data
+      },
+    }
+  } catch (error) {
+    console.error(error)
+  }
+
   return {
-    props: {},
+    props: {
+      movies: []
+    },
   }
 }
 
