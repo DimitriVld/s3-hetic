@@ -1,8 +1,8 @@
 import { makeQuery } from "../../../db"
 
 export default async function handler(req, res) {
-    const offset = req.query.offset || 0
-    const limit = offset + 20
+    const offset = parseInt(req.query.offset) || 0
+    const limit = 20
     const data = { length: 0, movies: [], error: null }
 
     try {
