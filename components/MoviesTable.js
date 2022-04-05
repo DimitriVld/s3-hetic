@@ -15,11 +15,11 @@ export default function MoviesTable({ data }) {
             <tbody>
                 {data.map(movie => (
                     <tr key={movie.id}>
-                        <td>{movie.name}</td>
-                        <td>{movie.special_features}</td>
+                        <td>{movie.title}</td>
+                        <td>{movie.gendra}</td>
                         <td>{movie.rating}</td>
                         <td>{`${movie.rental_price} $`}</td>
-                        <td>TBD</td>
+                        <td>{movie.rental_count}</td>
                     </tr>
                 ))}
             </tbody>
