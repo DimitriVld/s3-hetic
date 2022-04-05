@@ -1,6 +1,6 @@
 import mysql from 'mysql'
 
-export const db = mysql.createConnection({
+const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   port: process.env.DB_PORT,
@@ -8,15 +8,14 @@ export const db = mysql.createConnection({
   database: process.env.DB_SCHEMA
 })
 
+db.connect()
+
 export function makeQuery(query, values) {
     return new Promise((resolve, reject) => {
-        db.connect()
         db.query(query, values, (error, results) => {
             if (error) {
-                db.end()
                 reject(error)
             } else {
-                db.end()
                 resolve(results)
             }
         })
