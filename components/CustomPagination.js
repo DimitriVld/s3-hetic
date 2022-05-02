@@ -1,11 +1,11 @@
-import { Pagination, Row } from 'react-bootstrap'
+import { Pagination } from 'react-bootstrap'
 
-export default function CustomPagination({ page, length, handlePageChange }) {
+export default function CustomPagination({ page, length, handlePagination, functionScrollToTop }) {
     return (
         <div style={{ width: '100%', textAlign: 'center', display: 'flex' }}>
             <Pagination className="mx-auto" style={{ marginBottom: '75px' }}>
-                {page > 0 && <Pagination.First onClick={() => handlePageChange(0)} />}
-                {page > 0 && <Pagination.Prev onClick={() => handlePageChange(page - 20)} />}
+                {page > 0 && <Pagination.First onClick={() => {handlePagination(0); functionScrollToTop()}} />}
+                {page > 0 && <Pagination.Prev onClick={() => {handlePagination(page - 20); functionScrollToTop()}} />}
                 {page > 0 && <Pagination.Ellipsis />}
 
                 {Array.from({ length: Math.ceil(length / 20) }).map((_, index) => {
@@ -13,7 +13,7 @@ export default function CustomPagination({ page, length, handlePageChange }) {
                         return (
                             <Pagination.Item
                                 key={index}
-                                onClick={() => handlePageChange(index * 20)}
+                                onClick={() => {handlePagination(index * 20); functionScrollToTop()}}
                                 active={index * 20 === page}
                                 disabled={index * 20 === page}
                             >
@@ -24,8 +24,8 @@ export default function CustomPagination({ page, length, handlePageChange }) {
                 })}
 
                 {page < length - 20 && <Pagination.Ellipsis />}
-                {page < length - 20 && <Pagination.Next onClick={() => handlePageChange(page + 20)} />}
-                {page < length - 20 && <Pagination.Last onClick={() => handlePageChange(length - 20)} />}
+                {page < length - 20 && <Pagination.Next onClick={() => {handlePagination(page + 20); functionScrollToTop()}} />}
+                {page < length - 20 && <Pagination.Last onClick={() => {handlePagination(length - 20); functionScrollToTop()}} />}
             </Pagination>
         </div>
     )
